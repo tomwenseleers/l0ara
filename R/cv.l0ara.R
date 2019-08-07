@@ -1,6 +1,6 @@
 #' cross-validation for l0ara
 #' @description Does k-fold cross-validation for l0ara, produces a plot, and returns the optimal \code{lambda}
-#' @usage  cv.l0ara(x, y, family, lam, measure, nfolds, maxit, eps, seed)
+#' @usage  cv.l0ara(x, y, family, lam, standardize, measure, nfolds, maxit, eps, seed)
 #' @param x Input matrix as in \code{l0ara}.
 #' @param y Response variable as in \code{l0ara}.
 #' @param family Response type as in \code{l0ara}.

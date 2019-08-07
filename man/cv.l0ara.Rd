@@ -4,7 +4,7 @@
 \alias{cv.l0ara}
 \title{cross-validation for l0ara}
 \usage{
-cv.l0ara(x, y, family, lam, measure, nfolds, maxit, eps, seed)
+cv.l0ara(x, y, family, lam, standardize, measure, nfolds, maxit, eps, seed)
 }
 \arguments{
 \item{x}{Input matrix as in \code{l0ara}.}
