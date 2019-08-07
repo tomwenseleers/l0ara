@@ -11,4 +11,5 @@ License: GPL-2
 Imports: Rcpp (>= 0.12.6)
 LinkingTo: Rcpp, RcppArmadillo
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8

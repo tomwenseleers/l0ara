@@ -15,6 +15,8 @@ cv.l0ara(x, y, family, lam, measure, nfolds, maxit, eps, seed)
 
 \item{lam}{A user supplied \code{lambda} sequence in descending or asecending order. This function does not fit models. To fit a model with given \code{lam} value, use \code{l0ara}.}
 
+\item{standardize}{Standardize input matrix x or not?}
+
 \item{measure}{Loss function used for corss validation. \code{measurer="mse"} or \code{"mae"} for all models. \code{"measure"="class"} or \code{"measure"="auc"} only for logsitic regression.}
 
 \item{nfolds}{Number of folds. Default value is 10. Smallest value is 3.}
