@@ -5,6 +5,7 @@
 #' @param y Response variable as in \code{l0ara}.
 #' @param family Response type as in \code{l0ara}.
 #' @param lam A user supplied \code{lambda} sequence in descending or asecending order. This function does not fit models. To fit a model with given \code{lam} value, use \code{l0ara}.
+#' @param standardize Standardize input matrix x or not?
 #' @param measure Loss function used for corss validation. \code{measurer="mse"} or \code{"mae"} for all models. \code{"measure"="class"} or \code{"measure"="auc"} only for logsitic regression. 
 #' @param nfolds Number of folds. Default value is 10. Smallest value is 3.
 #' @param maxit Maximum number of passes over the data for \code{lambda}. Default value is \code{1e3}.
@@ -37,7 +38,9 @@
 #' fit <- cv.l0ara(x, y, family="gaussian", lam, measure = "mse")
 #' @export
 
-cv.l0ara <- function(x, y, family = c("gaussian", "logit", "gamma", "poisson", "inv.gaussian"), lam, measure = c("mse", "mae","class", "auc"), nfolds = 10,  maxit = 10^3, eps = 1e-04, seed){
+cv.l0ara <- function(x, y, family = c("gaussian", "logit", "gamma", "poisson", "inv.gaussian"), lam, 
+                     standardize = TRUE,
+                     measure = c("mse", "mae","class", "auc"), nfolds = 10,  maxit = 10^3, eps = 1e-04, seed){
   measure <- match.arg(measure)
   # error checking
   if (class(x) != "matrix") {
@@ -71,7 +74,7 @@ cv.l0ara <- function(x, y, family = c("gaussian", "logit", "gamma", "poisson", "
     which <- id == i
     yy <- y[!which]
     xx <- x[!which, ,drop=FALSE]
-    res[[i]] <- lapply(lam, function(ll) l0ara(xx,yy,lam=ll,family=family,maxit=maxit,eps=eps))
+    res[[i]] <- lapply(lam, function(ll) l0ara(xx,yy,lam=ll,family=family,standardize=standardize,maxit=maxit,eps=eps))
     if(measure == "mse") {
       pred <- lapply(res[[i]], predict,x[which,],type="response")
       error[,i] <- do.call(cbind, lapply(pred, function(pp) mean((pp-y[which])^2)))
