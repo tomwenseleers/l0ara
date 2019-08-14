@@ -70,6 +70,12 @@ List l0araC(arma::mat x, arma::vec y, String family, double lam, int maxit, doub
     }
     Xt = repmat(trans(w % w), n, 1) % x;
     iter += 1;
+    
+    for(int i=0; i<m; i++){ // added nonnegativity constraints here - TODO: add this as an option
+      if(w(i, 0) < 1e-3){
+        w(i,0) = 0;
+      }
+    }
 
     // check for convergence
     if(iter >= maxit){
