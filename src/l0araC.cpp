@@ -1,20 +1,20 @@
 #include <RcppArmadillo.h>
+// [[Rcpp::depends(RcppArmadillo)]]
 
 using namespace arma;
 using namespace Rcpp;
 
-// [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::export]]
-List l0araC(arma::mat x, arma::vec y, String family, double lam, int maxit, double eps) {
+List l0araC(arma::sp_mat x, arma::vec y, String family, double lam, LogicalVector nonneg, int maxit, double eps) {
   // initialization
   int n = x.n_rows;
   int m = x.n_cols;
   arma::mat w = zeros(m, 1);
   arma::mat old_w(m, 1);
-  arma::mat Xt(n, m);
+  arma::sp_mat Xt(n, m);
   arma::mat xw(n, 1);
   arma::mat s1(n, 1);
-  arma::mat A(n, n);
+  arma::sp_mat A(n, n);
   arma::mat a = zeros(m, 1);
   arma::mat z(n, 1);
 
@@ -71,11 +71,11 @@ List l0araC(arma::mat x, arma::vec y, String family, double lam, int maxit, doub
     Xt = repmat(trans(w % w), n, 1) % x;
     iter += 1;
     
-    for(int i=0; i<m; i++){ // added nonnegativity constraints here - TODO: add this as an option
-      if(w(i, 0) < 1e-3){
-        w(i,0) = 0;
-      }
-    }
+    for(int i=0; i<m; i++){ // added optional nonnegativity constraints here
+       if((w(i, 0) < 1e-3) && nonneg(i)){
+         w(i,0) = 0;
+       }
+     }
 
     // check for convergence
     if(iter >= maxit){

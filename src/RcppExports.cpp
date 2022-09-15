@@ -2,29 +2,86 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include <RcppArmadillo.h>
+#include <RcppEigen.h>
 #include <Rcpp.h>
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // l0araC
-List l0araC(arma::mat x, arma::vec y, String family, double lam, int maxit, double eps);
-RcppExport SEXP _l0ara_l0araC(SEXP xSEXP, SEXP ySEXP, SEXP familySEXP, SEXP lamSEXP, SEXP maxitSEXP, SEXP epsSEXP) {
+List l0araC(arma::sp_mat x, arma::vec y, String family, double lam, LogicalVector nonneg, int maxit, double eps);
+RcppExport SEXP _l0ara_l0araC(SEXP xSEXP, SEXP ySEXP, SEXP familySEXP, SEXP lamSEXP, SEXP nonnegSEXP, SEXP maxitSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::sp_mat >::type x(xSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
     Rcpp::traits::input_parameter< String >::type family(familySEXP);
     Rcpp::traits::input_parameter< double >::type lam(lamSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type nonneg(nonnegSEXP);
     Rcpp::traits::input_parameter< int >::type maxit(maxitSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
-    rcpp_result_gen = Rcpp::wrap(l0araC(x, y, family, lam, maxit, eps));
+    rcpp_result_gen = Rcpp::wrap(l0araC(x, y, family, lam, nonneg, maxit, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// solve_dense_lsconjgrad
+Rcpp::List solve_dense_lsconjgrad(Rcpp::List input);
+RcppExport SEXP _l0ara_solve_dense_lsconjgrad(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(solve_dense_lsconjgrad(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// solve_sparse_LDLT
+Rcpp::List solve_sparse_LDLT(Rcpp::List input);
+RcppExport SEXP _l0ara_solve_sparse_LDLT(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(solve_sparse_LDLT(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// solve_sparse_lsconjgrad
+Rcpp::List solve_sparse_lsconjgrad(Rcpp::List input);
+RcppExport SEXP _l0ara_solve_sparse_lsconjgrad(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(solve_sparse_lsconjgrad(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wls_solve
+Rcpp::List wls_solve(Eigen::SparseMatrix<double> X, Eigen::VectorXd y, Eigen::VectorXd w);
+RcppExport SEXP _l0ara_wls_solve(SEXP XSEXP, SEXP ySEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::SparseMatrix<double> >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type w(wSEXP);
+    rcpp_result_gen = Rcpp::wrap(wls_solve(X, y, w));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_l0ara_l0araC", (DL_FUNC) &_l0ara_l0araC, 6},
+    {"_l0ara_l0araC", (DL_FUNC) &_l0ara_l0araC, 7},
+    {"_l0ara_solve_dense_lsconjgrad", (DL_FUNC) &_l0ara_solve_dense_lsconjgrad, 1},
+    {"_l0ara_solve_sparse_LDLT", (DL_FUNC) &_l0ara_solve_sparse_LDLT, 1},
+    {"_l0ara_solve_sparse_lsconjgrad", (DL_FUNC) &_l0ara_solve_sparse_lsconjgrad, 1},
+    {"_l0ara_wls_solve", (DL_FUNC) &_l0ara_wls_solve, 3},
     {NULL, NULL, 0}
 };
 

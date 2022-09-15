@@ -4,10 +4,10 @@
 \alias{cv.l0ara}
 \title{cross-validation for l0ara}
 \usage{
-cv.l0ara(x, y, family, lam, standardize, measure, nfolds, maxit, eps, seed)
+cv.l0ara(x, y, family, lam, nonneg, standardize, measure, nfolds, maxit, eps, seed)
 }
 \arguments{
-\item{x}{Input matrix as in \code{l0ara}.}
+\item{x}{(Sparse) design matrix as in \code{l0ara}.}
 
 \item{y}{Response variable as in \code{l0ara}.}
 
@@ -15,7 +15,9 @@ cv.l0ara(x, y, family, lam, standardize, measure, nfolds, maxit, eps, seed)
 
 \item{lam}{A user supplied \code{lambda} sequence in descending or asecending order. This function does not fit models. To fit a model with given \code{lam} value, use \code{l0ara}.}
 
-\item{standardize}{Standardize input matrix x or not?}
+\item{nonneg}{Boolean vector with length equal to the number of columns of x specifying which coefficients should be constrained to be nonnegative.}
+
+\item{standardize}{Standardize input matrix x or not (default \code{FALSE})?}
 
 \item{measure}{Loss function used for corss validation. \code{measurer="mse"} or \code{"mae"} for all models. \code{"measure"="class"} or \code{"measure"="auc"} only for logsitic regression.}
 

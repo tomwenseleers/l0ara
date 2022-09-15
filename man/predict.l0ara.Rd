@@ -4,8 +4,12 @@
 \alias{predict.l0ara}
 \title{make predictions from a "l0ara" object.}
 \usage{
-\method{predict}{l0ara}(object, newx, type = c("link", "response",
-  "coefficients", "class"), ...)
+\method{predict}{l0ara}(
+  object,
+  newx,
+  type = c("link", "response", "coefficients", "class"),
+  ...
+)
 }
 \arguments{
 \item{object}{Fitted "l0ara" object.}

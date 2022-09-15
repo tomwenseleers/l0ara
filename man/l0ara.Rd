@@ -4,10 +4,10 @@
 \alias{l0ara}
 \title{fit a generalized linear model with l0 penalty}
 \usage{
-l0ara(x, y, family, lam, standardize, maxit, eps)
+l0ara(x, y, family, lam, nonneg, standardize, maxit, eps)
 }
 \arguments{
-\item{x}{Input matrix, of dimension nobs x nvars; each row is an observation vector.}
+\item{x}{Design matrix of dimension nobs x nvars; each row is an observation vector and each column is a variable/feature. The design matrix should be sparse (of class dgCMatrix), and if it is not should be coercable to that class. Regular matrices will be coerced to sparse matrices. Formula's will be converted to design matrices and coerced to a sparse matrix.}
 
 \item{y}{Response variable. Quantitative for \code{family="gaussian"}; positive quantitative for \code{family="gamma"} or \code{family="inv.gaussian"} ; a factor with two levels for \code{family="logit"}; non-negative counts for \code{family="poisson"}.}
 
@@ -15,7 +15,9 @@ l0ara(x, y, family, lam, standardize, maxit, eps)
 
 \item{lam}{A user supplied \code{lambda} value. If you have a \code{lam} sequence, use \code{cv.l0ara} first to select optimal tunning and then refit with \code{lam.min} . To use AIC, set \code{lam=2}; to use BIC, set \code{lam=log(n)}.}
 
-\item{standardize}{Logical flag for data normalization. If \code{standardize=TRUE}(default), independent variables in the design matrix \code{x} will be standardized with mean 0 and standard deviation 1.}
+\item{nonneg}{Boolean vector with length equal to the number of columns of x specifying which coefficients should be constrained to be nonnegative.}
+
+\item{standardize}{Logical flag for data normalization. If \code{standardize=TRUE}, independent variables in the design matrix \code{x} will be standardized with mean 0 and standard deviation 1; default value is \code{FALSE}.}
 
 \item{maxit}{Maximum number of passes over the data for \code{lambda}. Default value is \code{1e3}.}
 
